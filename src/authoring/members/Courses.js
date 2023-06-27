@@ -1,18 +1,11 @@
 import React, { useEffect } from 'react'
 import { useNew } from '../../providers/New';
 import style from './courses.module.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useDetail } from '../../providers/Detail';
-import { useBasic } from '../../providers/Basic';
-import { useEdit } from '../../providers/Edit';
+import { useLocation } from 'react-router-dom';
 
 const Courses = () => {
     const newHook = useNew();
     const location = useLocation();
-    const navigate = useNavigate();
-    const detail = useDetail();
-    const basic = useBasic();
-    const edit = useEdit();
 
     useEffect(() => {
         newHook.getMyPrograms();

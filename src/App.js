@@ -18,7 +18,6 @@ import Authoring from './authoring/Authoring';
 import BasicSection from './authoring/sections/basic/BasicSection';
 import Footer from './footer/Footer';
 import GradingSection from './authoring/sections/grading/GradingSection';
-import ContentSection from './authoring/sections/content/ContentSection';
 import TeamSection from './authoring/sections/team/TeamSection';
 import ResourcesSection from './authoring/sections/resources/ResourcesSection';
 import SubmitSection from './authoring/sections/submit/SubmitSection';

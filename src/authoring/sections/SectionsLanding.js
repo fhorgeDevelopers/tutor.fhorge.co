@@ -4,9 +4,6 @@ import AuthoringSections from '../../navigations/AuthoringSections';
 import { useParams } from 'react-router-dom';
 import { useEdit } from '../../providers/Edit';
 import tabstyle from './tabstyle.module.css';
-import { useBasic } from '../../providers/Basic';
-import { useAuth } from '../../providers/Auth';
-import { useDetail } from '../../providers/Detail';
 
 const SectionsLanding = () => {
     let { id } = useParams();

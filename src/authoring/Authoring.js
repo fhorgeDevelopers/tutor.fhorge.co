@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import style from './authoring.module.css'
 import { useNew } from '../providers/New';
 import Courses from './members/Courses';
-import Report from './members/Report';
 import Footer from '../footer/Footer';
 import AuthoringHome from '../navigations/AuthoringHome';
 import { useLocation } from 'react-router-dom';
