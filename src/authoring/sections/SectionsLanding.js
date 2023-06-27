@@ -23,7 +23,7 @@ const SectionsLanding = () => {
     //     };
     // }, []);
 
-    useEffect(() => {
+    useEffect((id) => {
         if (!window.localStorage.getItem('id')) {
             window.localStorage.setItem('id', id);
         }

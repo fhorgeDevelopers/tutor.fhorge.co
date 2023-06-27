@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useHook } from '../../../../providers/Hook';
 import { useAuth } from '../../../../providers/Auth';
 import { useDetail } from '../../../../providers/Detail';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
 import axios from 'axios';
 import Component from './Component';
 import swal from 'sweetalert';
@@ -15,28 +14,16 @@ const Lesson = (props) => {
     const auth = useAuth();
     const edit = useEdit();
     const detail = useDetail();
-    const [title, setTitle] = useState(props.data.title);
     const [positionID, setPositionID] = useState(props.data.position_id);
     const [lessonID, setLessonID] = useState();
-    const [done, setDone] = useState(false);
     const componentPosition = detail.getComPosition(props.data, positionID);
     const [componentTitle, setComponentTitle] = useState('');
     const [type, setType] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [key, setKey] = useState('0');
-    const [showMen, setShowMen] = useState(false);
     const [lessonTitle, setLessonTitle] = useState('');
     const [lessonPositionID, setLessonPositionID] = useState('');
     const [lessonVisibility, setLessonVisibility] = useState();
-
-
-    const toogleshowMenu = () => {
-        if (showMen) {
-            setShowMen(false)
-        } else {
-            setShowMen(true)
-        }
-    }
 
     const editDetail = () => {
         if (detail.currentlyEditing === props.data.id) {
@@ -157,7 +144,7 @@ const Lesson = (props) => {
                                 });
                                 detail.getDetails(id);
                                 edit.setUnsaved(false);
-                                detail.setTitle('');
+                                detail.setLessonTitle('');
                                 detail.setCurrentlyEditing('')
                                 detail.activeLesson('');
                             } else {
@@ -264,7 +251,7 @@ const Lesson = (props) => {
 
 
 
-    useEffect(() => {
+    useEffect((props, edit, done, title) => {
         setLessonTitle(props.data.title);
         setLessonPositionID(props.data.position_id);
         setLessonID(props.data.id);
@@ -275,19 +262,19 @@ const Lesson = (props) => {
         });
 
         return () => {
-            setDone(true);
+            return done + title;
         }
     }, [props.data])
 
 
 
-    useEffect(() => {
-        setTitle(props.data.title);
+    useEffect((props) => {
+        setLessonTitle(props.data.title);
         setPositionID(props.data.position_id);
         setLessonID(props.data.id)
         setIsLoading(false);
         return () => {
-            setDone(true);
+            return true;
         }
     }, [detail.content]);
 

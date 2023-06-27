@@ -7,7 +7,7 @@ const Courses = () => {
     const newHook = useNew();
     const location = useLocation();
 
-    useEffect(() => {
+    useEffect((newHook) => {
         newHook.getMyPrograms();
         return () => {
             return true;
