@@ -9,20 +9,6 @@ const SectionsLanding = () => {
     let { id } = useParams();
     const edit = useEdit();
 
-    // useEffect(() => {
-    //     const handleTabClose = event => {
-    //         event.preventDefault();
-    //         return (event.returnValue =
-    //             'Are you sure you want to exit?');
-
-    //     };
-    //     window.addEventListener('beforeunload', handleTabClose);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleTabClose);
-    //     };
-    // }, []);
-
     useEffect((id) => {
         if (!window.localStorage.getItem('id')) {
             window.localStorage.setItem('id', id);

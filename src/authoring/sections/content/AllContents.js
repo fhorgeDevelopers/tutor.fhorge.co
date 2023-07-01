@@ -566,219 +566,137 @@ const AllContents = () => {
     useEffect(() => {
         detail.getDetails(id);
         edit.setUnsaved(false)
-    }, [id])
+    }, [id, location.key])
     return (
         <>
             <SectionsLanding />
 
-            <div className='mt-4 mb-5' style={{ minHeight: '40vh' }} >
-                <div className='container'>
-                    <div className='row'>
+            <div className='mt-4 mb-2' style={{ height: '75vh' }} >
+                <div className='container mb-2' style={{ height: '100%' }}>
+                    <div className='row' style={{ height: '100%' }}>
                         {/* Left side of the content page  */}
-                        <div className='col-md-4'>
-                            {/* left side mini menu starts */}
-                            <div className='conMenu w-100' style={{ display: 'inline-flex' }}>
-                                <nav className='fg-1'>
-                                    <div className='d-flex'>
-                                        <button
-                                            disabled={edit.disableGradingNew}
-                                            className={'btn menu-link text-primary'}
-                                            onClick={() => openNewForm()}
-                                        >
-                                            Append
-                                        </button>
-                                        {/* <button
-                                            disabled={(currentlyEditing === '') !== (edit.disableGradingNew)}
-                                            className={`${(detail.currentlyEditing === '') ? 'btn menu-link' : 'd-none'} `}
-                                            style={{ color: '#00798C' }}
-                                            onClick={
-                                                (e) => {
-                                                    detail.passEditing(currentlyEditing, currentlyEditingType)
-                                                }
-                                            }
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className={`${((detail.currentlyEditing !== '')) ? 'btn menu-link' : 'd-none'} `}
-                                            style={{ color: '#00798C' }}
-                                            onClick={
-                                                (e) => {
-                                                    detail.passEditing(currentlyEditing, currentlyEditingType)
-                                                }
-                                            }
-                                        >
-                                            Save
-                                        </button>
-                                        <button
-                                            className={((detail.currentlyEditing !== '')) ? 'btn menu-link txtCancel' : 'd-none'}
-                                            style={{ color: 'rgba(245, 113, 113)' }}
-                                            onClick={
-                                                (e) => {
-                                                    detail.passEditing(currentlyEditing, currentlyEditingType)
-                                                }
-                                            }
-                                        >
-                                            Cancel
-                                        </button>
-                                        <button
-                                            disabled={(currentlyEditing === '') !== (edit.disableGradingNew)}
-                                            className={`${(detail.currentlyEditing === '') ? 'btn menu-link' : 'd-none'} `}
-                                            style={{ color: '#FF4040' }}
-                                            onClick={() => deleteSelected()}
-                                        >
-                                            Delete
-                                        </button> */}
+                        <div className='col-md-4' style={{ height: '100%' }}>
+                            <div className="row" style={{ height: '100%' }}>
+                                <div className="col-lg-12" style={{ height: '48px' }}>
+                                    <div className='conMenu w-100' style={{ display: 'inline-flex' }}>
+                                        <nav className='fg-1'>
+                                            <div className='d-flex'>
+                                                <button
+                                                    disabled={edit.disableGradingNew}
+                                                    className={'btn menu-link text-primary'}
+                                                    onClick={() => openNewForm()}
+                                                >
+                                                    Append
+                                                </button>
+                                            </div>
+                                        </nav>
+                                        <div className='fg-0 d-flex' >
+                                            <button className={'btn menu-link text-primary'}>
+                                                Preview
+                                            </button>
+                                        </div>
                                     </div>
-                                </nav>
-                                <div className='fg-0 d-flex' >
-                                    <button className={'btn menu-link text-primary'}>
-                                        Preview
-                                    </button>
                                 </div>
-                            </div>
-                            {/* left side mini menu ends  */}
-
-                            {/* course detail list starts  */}
-                            <div className='conMenu p-0 w-100 mb-5 mt-4'>
-                                <div className='rightStraight w-100 pt-2 pb-2'>
-                                    <ul className='no-list-style p-0 m-0 secMain w-100' id="clickIn">
-                                        {(detail.sections.length === 0) ? (
-                                            <>
-                                                {detail.gettingContent ? (
+                                <div className="col-lg-12 mt-3" style={{ height: 'calc(100% - 48px)' }}>
+                                    <div className='conMenu p-0 w-100' style={{ height: '100%' }}>
+                                        <div className='rightStraight w-100 pt-2 pb-2' style={{ height: '100%' }}>
+                                            <ul className='no-list-style p-0 m-0 secMain w-100' id="clickIn">
+                                                {(detail.sections.length === 0) ? (
                                                     <>
-                                                        <li style={{ padding: '0' }}>
-                                                            <span className='activeTab w-100 d-flex alignCenter p-1 justify-content-center'>
-                                                                <span>
-                                                                    <span className='fa fa-spinner fa-spin' style={{ marginRight: '10px' }}></span>
-                                                                    Fetching sections
-                                                                </span>
-                                                            </span>
-                                                        </li>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        {detail.contentError ? (
+                                                        {detail.gettingContent ? (
                                                             <>
                                                                 <li style={{ padding: '0' }}>
                                                                     <span className='activeTab w-100 d-flex alignCenter p-1 justify-content-center'>
-                                                                        <span className='fa fa-exclamation-triangle fa-2x text-danger' style={{ marginRight: '20px' }}></span>
                                                                         <span>
-                                                                            Error fetching sections, <br />Please reload page!
+                                                                            <span className='fa fa-spinner fa-spin' style={{ marginRight: '10px' }}></span>
+                                                                            Fetching sections
                                                                         </span>
                                                                     </span>
                                                                 </li>
                                                             </>
                                                         ) : (
                                                             <>
-                                                                {detail.sectionCount === 0 ? (
-                                                                    <li style={{ padding: '0' }}>
-                                                                        <span className='activeTab w-100 d-flex alignCenter p-1 justify-content-center'>
-                                                                            <span className='fa fa-exclamation text-danger' style={{ marginRight: '20px' }}></span>
-                                                                            <span>
-                                                                                There are no sections!
+                                                                {detail.contentError ? (
+                                                                    <>
+                                                                        <li style={{ padding: '0' }}>
+                                                                            <span className='activeTab w-100 d-flex alignCenter p-1 justify-content-center'>
+                                                                                <span className='fa fa-exclamation-triangle fa-2x text-danger' style={{ marginRight: '20px' }}></span>
+                                                                                <span>
+                                                                                    Error fetching sections, <br />Please reload page!
+                                                                                </span>
                                                                             </span>
-                                                                        </span>
-                                                                    </li>
-                                                                ) : null}
+                                                                        </li>
+                                                                    </>
+                                                                ) : (
+                                                                    <>
+                                                                        {detail.sectionCount === 0 ? (
+                                                                            <li style={{ padding: '0' }}>
+                                                                                <span className='activeTab w-100 d-flex alignCenter p-1 justify-content-center'>
+                                                                                    <span className='fa fa-exclamation text-danger' style={{ marginRight: '20px' }}></span>
+                                                                                    <span>
+                                                                                        There are no sections!
+                                                                                    </span>
+                                                                                </span>
+                                                                            </li>
+                                                                        ) : null}
+                                                                    </>
+                                                                )}
                                                             </>
                                                         )}
                                                     </>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <>
-                                                {(detail.sections.map((asection) => (
+                                                ) : (
                                                     <>
-                                                        <li id={asection.id} key={asection.id} style={{ padding: '0' }}>
-                                                            <span
-                                                                className={`${((detail.viewing === asection.id) && (detail.activeSub === "") && (detail.activeLesson === "")) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}
-                                                                onClick={
-                                                                    (e) => {
-                                                                        if (edit.unsaved) {
-                                                                            swal({
-                                                                                title: "Cancel Editing?",
-                                                                                text: "All unsaved changes will be gone, do you want to proceed?",
-                                                                                icon: "warning",
-                                                                                buttons: ['Continue Editing', 'Cancel Editing'],
-                                                                                dangerMode: true,
-                                                                            }).then((willCancel) => {
-                                                                                if (willCancel) {
-                                                                                    detail.toggleView(asection.id);
-                                                                                    console.log(asection.id)
-                                                                                    passEditing(asection.id, 'section');
-                                                                                    detail.openAndClose(asection.id);
-                                                                                    edit.setUnsaved(false);
+                                                        {(detail.sections.map((asection) => (
+                                                            <>
+                                                                <li id={asection.id} key={asection.id} style={{ padding: '0' }}>
+                                                                    <span
+                                                                        className={`${((detail.viewing === asection.id) && (detail.activeSub === "") && (detail.activeLesson === "")) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}
+                                                                        onClick={
+                                                                            (e) => {
+                                                                                if (edit.unsaved) {
+                                                                                    swal({
+                                                                                        title: "Cancel Editing?",
+                                                                                        text: "All unsaved changes will be gone, do you want to proceed?",
+                                                                                        icon: "warning",
+                                                                                        buttons: ['Continue Editing', 'Cancel Editing'],
+                                                                                        dangerMode: true,
+                                                                                    }).then((willCancel) => {
+                                                                                        if (willCancel) {
+                                                                                            detail.toggleView(asection.id);
+                                                                                            console.log(asection.id)
+                                                                                            passEditing(asection.id, 'section');
+                                                                                            detail.openAndClose(asection.id);
+                                                                                            edit.setUnsaved(false);
+                                                                                        } else {
+                                                                                            return false;
+                                                                                        }
+                                                                                    })
                                                                                 } else {
-                                                                                    return false;
+                                                                                    detail.toggleView(asection.id);
+                                                                                    detail.setData([])
+                                                                                    passEditing(asection.id, 'section');
+                                                                                    detail.openAndClose(asection.id)
+                                                                                    edit.setUnsaved(false);
                                                                                 }
-                                                                            })
-                                                                        } else {
-                                                                            detail.toggleView(asection.id);
-                                                                            detail.setData([])
-                                                                            passEditing(asection.id, 'section');
-                                                                            detail.openAndClose(asection.id)
-                                                                            edit.setUnsaved(false);
-                                                                        }
-                                                                    }
-                                                                }>
-                                                                <span className='leftIds'>
-                                                                    {asection.position_id}
-                                                                </span>
-                                                                <span
-                                                                    className={`fa mr-15 ${(detail.opened.includes(asection.id)) ? 'fa-caret-down' : 'fa-caret-right'}`}
-                                                                ></span>
-                                                                <span>
-                                                                    {asection.title}
-                                                                </span>
-                                                            </span>
-                                                            <ul className={`${(detail.opened.includes(asection.id)) ? 'd-block' : 'd-none'} no-list-style pl-20`}>
-                                                                {(asection.subsections.map((subSection) => (
-                                                                    <li id={subSection.id} key={subSection.id} style={{ padding: '0' }}>
-                                                                        <span
-                                                                            className={`${((detail.activeSub === subSection.id) && (detail.activeLesson === "")) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}
-                                                                            onClick={
-                                                                                (e) => {
-                                                                                    if (edit.unsaved) {
-                                                                                        swal({
-                                                                                            title: "Cancel Editing?",
-                                                                                            text: "All unsaved changes will be gone, do you want to proceed?",
-                                                                                            icon: "warning",
-                                                                                            buttons: ['Continue Editing', 'Cancel Editing'],
-                                                                                            dangerMode: true,
-                                                                                        }).then((willCancel) => {
-                                                                                            if (willCancel) {
-                                                                                                detail.toggleActiveSub(subSection.id, asection.id);
-                                                                                                detail.setData([subSection])
-                                                                                                passEditing(subSection.id, 'subsection');
-                                                                                                detail.openAndClose(subSection.id)
-                                                                                                edit.setUnsaved(false);
-                                                                                            } else {
-                                                                                                return false;
-                                                                                            }
-                                                                                        })
-                                                                                    } else {
-                                                                                        detail.toggleActiveSub(subSection.id, asection.id);
-                                                                                        detail.setData([subSection])
-                                                                                        passEditing(subSection.id, 'subsection');
-                                                                                        detail.openAndClose(subSection.id)
-                                                                                        edit.setUnsaved(false);
-                                                                                    }
-                                                                                }
-                                                                            }>
-                                                                            <span className='leftIds'>
-                                                                                {subSection.position_id}
-                                                                            </span>
-                                                                            <span className={`fa mr-15 ${(detail.opened.includes(subSection.id)) ? 'fa-caret-down' : 'fa-caret-right'}`}></span>
-                                                                            <span>
-                                                                                {subSection.title}
-                                                                            </span>
+                                                                            }
+                                                                        }>
+                                                                        <span className='leftIds'>
+                                                                            {asection.position_id}
                                                                         </span>
-                                                                        <ul className={`${(detail.opened.includes(subSection.id)) ? 'd-block' : 'd-none'} no-list-style pl-20`} >
-                                                                            {(subSection.lessons.map((lesson) => (
-                                                                                <li id={lesson.id} key={lesson.id} style={{ padding: '0' }}
+                                                                        <span
+                                                                            className={`fa mr-15 ${(detail.opened.includes(asection.id)) ? 'fa-caret-down' : 'fa-caret-right'}`}
+                                                                        ></span>
+                                                                        <span>
+                                                                            {asection.title}
+                                                                        </span>
+                                                                    </span>
+                                                                    <ul className={`${(detail.opened.includes(asection.id)) ? 'd-block' : 'd-none'} no-list-style pl-20`}>
+                                                                        {(asection.subsections.map((subSection) => (
+                                                                            <li id={subSection.id} key={subSection.id} style={{ padding: '0' }}>
+                                                                                <span
+                                                                                    className={`${((detail.activeSub === subSection.id) && (detail.activeLesson === "")) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}
                                                                                     onClick={
-                                                                                        e => {
+                                                                                        (e) => {
                                                                                             if (edit.unsaved) {
                                                                                                 swal({
                                                                                                     title: "Cancel Editing?",
@@ -788,48 +706,89 @@ const AllContents = () => {
                                                                                                     dangerMode: true,
                                                                                                 }).then((willCancel) => {
                                                                                                     if (willCancel) {
-                                                                                                        detail.setData([])
-                                                                                                        detail.toggleActiveLesson(lesson.id, lesson);
-                                                                                                        passEditing(lesson.id, 'lesson');
+                                                                                                        detail.toggleActiveSub(subSection.id, asection.id);
+                                                                                                        detail.setData([subSection])
+                                                                                                        passEditing(subSection.id, 'subsection');
+                                                                                                        detail.openAndClose(subSection.id)
                                                                                                         edit.setUnsaved(false);
                                                                                                     } else {
                                                                                                         return false;
                                                                                                     }
                                                                                                 })
                                                                                             } else {
-                                                                                                detail.setData([])
-                                                                                                detail.toggleActiveLesson(lesson.id, lesson);
-                                                                                                passEditing(lesson.id, 'lesson');
+                                                                                                detail.toggleActiveSub(subSection.id, asection.id);
+                                                                                                detail.setData([subSection])
+                                                                                                passEditing(subSection.id, 'subsection');
+                                                                                                detail.openAndClose(subSection.id)
                                                                                                 edit.setUnsaved(false);
                                                                                             }
                                                                                         }
                                                                                     }>
-                                                                                    <span className='leftIds' >
-                                                                                        {lesson.position_id}
+                                                                                    <span className='leftIds'>
+                                                                                        {subSection.position_id}
                                                                                     </span>
-                                                                                    <span className={`${(detail.activeLesson === lesson.id) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}>
-                                                                                        <span>
-                                                                                            {lesson.title}
-                                                                                        </span>
+                                                                                    <span className={`fa mr-15 ${(detail.opened.includes(subSection.id)) ? 'fa-caret-down' : 'fa-caret-right'}`}></span>
+                                                                                    <span>
+                                                                                        {subSection.title}
                                                                                     </span>
-                                                                                </li>
-                                                                            )))}
-                                                                        </ul>
-                                                                    </li>
-                                                                )))}
-                                                            </ul>
-                                                        </li>
+                                                                                </span>
+                                                                                <ul className={`${(detail.opened.includes(subSection.id)) ? 'd-block' : 'd-none'} no-list-style pl-20`} >
+                                                                                    {(subSection.lessons.map((lesson) => (
+                                                                                        <li id={lesson.id} key={lesson.id} style={{ padding: '0' }}
+                                                                                            onClick={
+                                                                                                e => {
+                                                                                                    if (edit.unsaved) {
+                                                                                                        swal({
+                                                                                                            title: "Cancel Editing?",
+                                                                                                            text: "All unsaved changes will be gone, do you want to proceed?",
+                                                                                                            icon: "warning",
+                                                                                                            buttons: ['Continue Editing', 'Cancel Editing'],
+                                                                                                            dangerMode: true,
+                                                                                                        }).then((willCancel) => {
+                                                                                                            if (willCancel) {
+                                                                                                                detail.setData([])
+                                                                                                                detail.toggleActiveLesson(lesson.id, lesson);
+                                                                                                                passEditing(lesson.id, 'lesson');
+                                                                                                                edit.setUnsaved(false);
+                                                                                                            } else {
+                                                                                                                return false;
+                                                                                                            }
+                                                                                                        })
+                                                                                                    } else {
+                                                                                                        detail.setData([])
+                                                                                                        detail.toggleActiveLesson(lesson.id, lesson);
+                                                                                                        passEditing(lesson.id, 'lesson');
+                                                                                                        edit.setUnsaved(false);
+                                                                                                    }
+                                                                                                }
+                                                                                            }>
+                                                                                            <span className='leftIds' >
+                                                                                                {lesson.position_id}
+                                                                                            </span>
+                                                                                            <span className={`${(detail.activeLesson === lesson.id) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}>
+                                                                                                <span>
+                                                                                                    {lesson.title}
+                                                                                                </span>
+                                                                                            </span>
+                                                                                        </li>
+                                                                                    )))}
+                                                                                </ul>
+                                                                            </li>
+                                                                        )))}
+                                                                    </ul>
+                                                                </li>
+                                                            </>
+                                                        )))}
                                                     </>
-                                                )))}
-                                            </>
-                                        )}
-                                    </ul>
+                                                )}
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            {/* curse detail list ends  */}
                         </div>
                         {/* Right side of the content page  */}
-                        <div className='col-md-8'>
+                        <div className='col-md-8' style={{ height: '100%', overflowY: 'scroll' }}>
                             {/* right side content div starts  */}
                             <div className='mt-2'>
                                 {(detail.title === 'Lesson') ? (
