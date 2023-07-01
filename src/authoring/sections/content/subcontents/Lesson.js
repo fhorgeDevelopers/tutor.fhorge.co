@@ -268,7 +268,7 @@ const Lesson = (props) => {
 
 
 
-    useEffect((props) => {
+    useEffect(() => {
         setLessonTitle(props.data.title);
         setPositionID(props.data.position_id);
         setLessonID(props.data.id)

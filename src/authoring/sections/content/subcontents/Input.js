@@ -55,10 +55,6 @@ export const Input = (props) => {
     const [show_answer, setShowAnswer] = useState(props.data.show_answer);
     const [exercise_overview, setExerciseOverview] = useState(props.data.exercise_overview);
 
-    useEffect(() => {
-        setShowMen(false)
-    }, [props.key]);
-
     const [patchData, setPatchData] = useState({
         lesson_id: props.data.lesson_id,
         id: props.data.id,
@@ -89,6 +85,14 @@ export const Input = (props) => {
         show_answer: show_answer,
         show_allocated_score: show_allocated_score,
     });
+
+    const toogleshowMen = () => {
+        if (showMen) {
+            setShowMen(false)
+        } else {
+            setShowMen(true)
+        }
+    }
 
     const editComponent = (id) => {
         if (edit.unsaved) {
@@ -263,14 +267,7 @@ export const Input = (props) => {
                 setIsLoading(false)
             });
     }
-
-    const toogleshowMen = () => {
-        if (showMen) {
-            setShowMen(false)
-        } else {
-            setShowMen(true)
-        }
-    }
+    
     return (
         <>
             <form id={props.id} onSubmit={(e) => handleSubmit(e)}>
