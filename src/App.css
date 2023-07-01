@@ -313,7 +313,7 @@ span:disabled {
 
 .ck.ck-editor__editable_inline[dir=ltr] {
   text-align: left;
-  max-height: 250px;
+  max-height: 500px;
   overflow-y: auto;
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SectionsLanding from '../SectionsLanding'
 import { useBasic } from '../../../providers/Basic'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useEdit } from '../../../providers/Edit';
 import { useAuth } from '../../../providers/Auth';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -12,9 +12,9 @@ const BasicSection = () => {
     const edit = useEdit();
     const auth = useAuth();
     const location = useLocation();
-    const [subjectIndex, setSubjectIndex] = useState(0);
-    const subjects = 'subjects';
-    let { id } = useParams();
+    // const [subjectIndex, setSubjectIndex] = useState(0);
+    // const subjects = 'subjects';
+    // let { id } = useParams();
     const [disableBasicEdit, setDisableBasicEdit] = useState('');
 
     const roleCheck = () => {
@@ -38,19 +38,17 @@ const BasicSection = () => {
         document.addEventListener("change", function (event) {
             edit.setUnsaved(true);
         });
-
-
         return () => {
             return true;
         }
-    }, [location.key])
+    }, [location.key, edit])
 
-    const changeGroup = (index) => {
-        setSubjectIndex(index);
-        auth.subjectGroup.forEach(function (value, i) {
+    // const changeGroup = (index) => {
+    //     setSubjectIndex(index);
+    //     auth.subjectGroup.forEach(function (value, i) {
 
-        });
-    }
+    //     });
+    // }
 
     return (
         <>
@@ -80,7 +78,7 @@ const BasicSection = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
 
             <div className='container mb-5'>
@@ -166,7 +164,7 @@ const BasicSection = () => {
                                             }}
                                         />
                                     </div>
-                                    <div className='form-group mt-3'>
+                                    {/* <div className='form-group mt-3'>
                                         <div className="row">
                                             <div className='col-lg-4'>
                                                 <label htmlFor="subjectGroup" className='label'>Subject Group</label>
@@ -231,7 +229,7 @@ const BasicSection = () => {
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="form-group mt-3">
                                         <label htmlFor="keyWords" className='label'>Keyword Tags</label>
                                         <textarea
