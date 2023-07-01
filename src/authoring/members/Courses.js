@@ -263,10 +263,9 @@ const Courses = () => {
                                                                     if (program.role_reader === true) {
                                                                         role = 'Reader'
                                                                     }
-                                                                    alert(program.course_id.id)
                                                                     window.localStorage.setItem('id', program.course_id.id)
                                                                     newHook.enterEdit(role, program.course_id.id)
-                                                                } else if(e.target.role === 'delete') {
+                                                                } else if(e.target.value === 'delete') {
                                                                     newHook.deleteCourse(program.course_id.id)
                                                                 } else {
                                                                     return false;
