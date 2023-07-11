@@ -522,7 +522,6 @@ const Question = (props) => {
                                                                         placeholder="1"
                                                                         defaultValue={option1}
                                                                         onChange={e => set_option1(e.target.value)}
-                                                                        aria-describedby="helpId"
                                                                         disabled={(detail.activeQue === que.id) ? false : true}
                                                                     />
                                                                 </div>
