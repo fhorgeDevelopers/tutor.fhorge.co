@@ -57,7 +57,8 @@ export const Detail = ({ children }) => {
     const [lessonVisibility, setLessonVisibility] = useState();
     const [canEdit, setCanEdit] = useState(false);
     const [canDelete, setCanDelete] = useState(false);
-    const [activeWork, setActiveWork] = useState('')
+    const [activeWork, setActiveWork] = useState('');
+    const [activeQue, setActiveQue] = useState('');
     const [currentlyEditing, setCurrentlyEditing] = useState('');
     const [currentlyEditingType, setCurrentlyEditingType] = useState('');
 
@@ -208,7 +209,7 @@ export const Detail = ({ children }) => {
                     }
                 })
                 .catch(function (error) {
-                    
+
                     setIsLoading(false)
                     setHasError(true)
                 });
@@ -228,6 +229,14 @@ export const Detail = ({ children }) => {
             } else {
                 setNewForm(true);
             }
+        }
+    }
+
+    const toggleQuestionEdit = (theID) => {
+        if (activeQue === theID) {
+            setActiveQue('');
+        } else {
+            setActiveQue(theID);
         }
     }
 
@@ -283,18 +292,18 @@ export const Detail = ({ children }) => {
 
     const getComPosition = (lesArray, position_id) => {
         let now = "0" + (lesArray.components.length + 1);
-        return position_id + '.' + now;
+        return now;
     }
 
     const editContentToogle = () => {
         if (!editContent) {
             setEditContent(true)
             setReadOnly(false)
-            
+
         } else {
             setEditContent(false)
             setReadOnly(true)
-            
+
         }
     }
 
@@ -334,7 +343,6 @@ export const Detail = ({ children }) => {
                 'Content-Type': 'application/json'
             }
         };
-        setGettingContent(true);
         setFetchingLesson(true);
 
         axios(config)
@@ -503,13 +511,13 @@ export const Detail = ({ children }) => {
     }, [location.key, data])
 
     useEffect(() => {
-      setOpened([]);
-    
-      return () => {
-        return true;
-      }
+        setOpened([]);
+
+        return () => {
+            return true;
+        }
     }, [window.localStorage.getItem(id)])
-    
+
 
 
     return (
@@ -541,6 +549,7 @@ export const Detail = ({ children }) => {
                 canDelete, setCanDelete, openAndClose,
                 activeWork, setActiveWork, opened, setOpened,
                 passEditing, currentlyEditing, hasError, isLoading, setCurrentlyEditing,
+                activeQue, toggleQuestionEdit
             }}>
             {children}
         </DetailContext.Provider>

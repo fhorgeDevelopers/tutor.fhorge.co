@@ -12,9 +12,8 @@ const BasicSection = () => {
     const edit = useEdit();
     const auth = useAuth();
     const location = useLocation();
-    // const [subjectIndex, setSubjectIndex] = useState(0);
-    // const subjects = 'subjects';
-    // let { id } = useParams();
+    const [subjectIndex, setSubjectIndex] = useState('');
+    const [basicSubjects, setBasicSubjects] = useState([]);
     const [disableBasicEdit, setDisableBasicEdit] = useState('');
 
     const roleCheck = () => {
@@ -41,14 +40,21 @@ const BasicSection = () => {
         return () => {
             return true;
         }
-    }, [location.key, edit])
+    }, [location.key])
 
-    // const changeGroup = (index) => {
-    //     setSubjectIndex(index);
-    //     auth.subjectGroup.forEach(function (value, i) {
+    const changeGroup = (value) => {
+        if (value === '') {
+            setSubjectIndex('')
+        } else {
+            let fill = value.split('|||');
+            setSubjectIndex(fill[1]);
 
-    //     });
-    // }
+            var returnValues = auth.subjectGroup[fill[1]];
+            setBasicSubjects(returnValues)
+            console.log(returnValues);
+        }
+
+    }
 
     return (
         <>
@@ -78,7 +84,7 @@ const BasicSection = () => {
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
 
             <div className='container mb-5'>
@@ -122,9 +128,16 @@ const BasicSection = () => {
                                                     id="language"
                                                     disabled={edit.readOnly}
                                                     onChange={(e) => { basic.setInstitutionID(e.target.value); }}
+                                                    defaultValue={basic.institutionID}
                                                 >
+                                                    <option value="">Select Institution</option>
                                                     {auth.institutions.map((inst) => (
-                                                        <option key={inst['id']} value={inst['id']} selected={basic.institutionID === inst['id']} className={(basic.institutionID === inst['id']) ? 'd-none' : ''}>
+                                                        <option
+                                                            key={inst['id']}
+                                                            value={inst['id']}
+                                                            className={(basic.institutionID === inst['id']) ? 'd-none' : ''}
+                                                            selected={(basic.institutionID === inst['id']) ? true : false}
+                                                        >
                                                             {inst['institution']}
                                                         </option>
                                                     ))}
@@ -164,7 +177,7 @@ const BasicSection = () => {
                                             }}
                                         />
                                     </div>
-                                    {/* <div className='form-group mt-3'>
+                                    <div className='form-group mt-3'>
                                         <div className="row">
                                             <div className='col-lg-4'>
                                                 <label htmlFor="subjectGroup" className='label'>Subject Group</label>
@@ -183,33 +196,47 @@ const BasicSection = () => {
                                                     {auth.subjectGroup.map((subject, index) => (
                                                         <option
                                                             key={subject.subject_group}
-                                                            // selected={(basic.subjectName === subject.id)}
-                                                            // onClickCapture={e => { alert('changed'); changeGroup(e, index); basic.setSubjectName(subject.id) }}
-                                                            value={`${subject.id}`}>
+                                                            value={`${subject.id}|||${index}`}
+                                                            selected={basic.subjectGroupName === subject.id}
+                                                            >
                                                             {subject.subject_group}
                                                         </option>
                                                     ))}
                                                 </select>
                                             </div>
-                                            <div className='col-lg-4'>
+                                            <div className="col-lg-4">
                                                 <label htmlFor="subjectName" className='label' >Subject Name</label>
-                                                <select className='form-select'
-                                                    name="subjectName"
-                                                    id="subjectName"
-                                                    required={true}
-                                                    disabled={edit.readOnly}
-                                                    onChange={e => { basic.setSubjectID(e.target.value); }}
-                                                >
-                                                    <option value={(basic.subjectID === '') ? null : basic.subjectID}>{(basic.subjectID === '') ? 'select' : basic.subjectName}</option>
-                                                    {auth.subjectGroup.length === 0 ? (
-                                                        <>
-                                                        </>
-                                                    ) : (
-                                                        <>
+                                                {(subjectIndex !== '') ? (
+                                                    <>
+                                                        <select className='form-select'
+                                                            name="subjectName"
+                                                            id="subjectName"
+                                                            required={true}
+                                                            disabled={edit.readOnly}
+                                                            onChange={e => { basic.setSubjectID(e.target.value); }}
+                                                        >
+                                                            <option>Select Subject</option>
+                                                            {
+                                                                (basicSubjects.length === 0) ? null : (
+                                                                    <>
+                                                                        {basicSubjects.subjects.map((subject, index) => (
+                                                                            <option
+                                                                                key={subject.subject_group}
+                                                                                value={`${subject.id}`}>
+                                                                                {subject.subject_name}
+                                                                            </option>
+                                                                        ))}
+                                                                    </>
+                                                                )
+                                                            }
+                                                        </select>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <input type="text" readOnly={true} value={basic.subjectName} className='form-control' />
+                                                    </>
+                                                )}
 
-                                                        </>
-                                                    )}
-                                                </select>
                                             </div>
                                             <div className='col-lg-4'>
                                                 <label htmlFor="language" className='label'>Language</label>
@@ -222,14 +249,18 @@ const BasicSection = () => {
                                                 >
                                                     <option>Select</option>
                                                     {auth.languageChoices.map((lang) => (
-                                                        <option key={lang['V']} value={lang['V']} >
+                                                        <option
+                                                            key={lang['V']}
+                                                            value={lang['V']}
+                                                            selected={(basic.language === lang['V']) ? true : false}
+                                                        >
                                                             {lang['D']}
                                                         </option>
                                                     ))}
                                                 </select>
                                             </div>
                                         </div>
-                                    </div> */}
+                                    </div>
                                     <div className="form-group mt-3">
                                         <label htmlFor="keyWords" className='label'>Keyword Tags</label>
                                         <textarea
@@ -252,12 +283,16 @@ const BasicSection = () => {
                                             name="level"
                                             id="level"
                                             disabled={edit.readOnly}
-                                            defaultChecked={basic.level}
+                                            defaultValue={basic.level}
                                             onChange={e => basic.setLevel(e.target.value)}
                                         >
                                             <option> Select Level</option>
                                             {auth.levelChoices.map((lvl) => (
-                                                <option key={lvl['V']} value={lvl['V']}>
+                                                <option
+                                                    key={lvl['V']}
+                                                    value={lvl['V']}
+                                                    selected={(basic.level === lvl['V']) ? true : false}
+                                                >
                                                     {lvl['D']}
                                                 </option>
                                             ))}
@@ -291,13 +326,13 @@ const BasicSection = () => {
                                                 </small>
                                                 <div style={{ marginLeft: "20px" }}>
                                                     <label className="form-check-label" style={{ marginRight: '30px' }}>
-                                                        <input className="form-check-input" type="radio" name="examRequired" id="" value={true} onChange={e => { basic.setEntranceExamRequired(e.target.value) }} defaultChecked={basic.entranceExamRequired === true}
+                                                        <input className="form-check-input" type="radio" name="examRequired" id="" value={'true'} onChange={e => { basic.setEntranceExamRequired(e.target.value) }} defaultChecked={basic.entranceExamRequired === 'true'}
                                                             disabled={edit.readOnly} /> Yes
                                                     </label>
                                                 </div>
                                                 <div style={{ marginLeft: "20px" }}>
                                                     <label className="form-check-label" style={{ marginRight: '30px' }}>
-                                                        <input className="form-check-input" type="radio" name="examRequired" id="" value={false} onChange={e => { basic.setEntranceExamRequired(e.target.value) }} defaultChecked={basic.entranceExamRequired === false}
+                                                        <input className="form-check-input" type="radio" name="examRequired" id="" value={'false'} onChange={e => { basic.setEntranceExamRequired(e.target.value) }} defaultChecked={basic.entranceExamRequired === 'false'}
                                                             disabled={edit.readOnly} /> No
                                                     </label>
                                                 </div>
@@ -388,11 +423,11 @@ const BasicSection = () => {
                                             <label htmlFor="coursePacing" className='label'>Course Pacing</label>
                                             <div style={{ marginLeft: "20px" }}>
                                                 <label className="form-check-label" style={{ marginRight: '30px' }}>
-                                                    <input className="form-check-input" type="radio" name="coursePacing" id="" value={'IN'} onChange={e => { basic.setCoursePacing(e.target.value) }} defaultChecked={basic.coursePacing === 'IN'}
+                                                    <input className="form-check-input" type="radio" name="coursePacing" id="" value='IN' onSelect={e => { alert(e.target.value); basic.setCoursePacing(e.target.value) }} defaultChecked={basic.coursePacing === 'IN'}
                                                         disabled={edit.readOnly} /> Instructor Led
                                                 </label>
                                                 <label className="form-check-label" style={{ marginLeft: '30px' }}>
-                                                    <input className="form-check-input" type="radio" name="coursePacing" id="" value={'SP'} onChange={e => { basic.setCoursePacing(e.target.value) }} defaultChecked={basic.coursePacing === 'SP'}
+                                                    <input className="form-check-input" type="radio" name="coursePacing" id="" value='SP' onSelect={e => { basic.setCoursePacing(e.target.value) }} defaultChecked={basic.coursePacing === 'SP'}
                                                         disabled={edit.readOnly} /> Self Paced
                                                 </label>
                                             </div>

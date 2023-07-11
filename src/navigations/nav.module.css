@@ -1,6 +1,6 @@
 .isNavbar {
     box-shadow: 0px 4px 4px 0px #00000040;
-    z-index: 2 !important;
+    z-index: 1 !important;
 }
 
 .navTitle {

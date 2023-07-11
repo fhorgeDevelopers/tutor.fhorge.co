@@ -2,6 +2,7 @@ import React from 'react'
 import SectionsLanding from '../SectionsLanding'
 import ContentNav from './subcontents/ContentNav'
 import RightNav from './subcontents/RightNav'
+import PreviewAuthoring from './PreviewAuthoring'
 
 const ContentSection = () => {
     return (

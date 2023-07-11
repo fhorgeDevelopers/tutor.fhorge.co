@@ -396,6 +396,8 @@ const AllContents = () => {
             setIsLoading(false);
             return false;
         }
+        let bpid = nextSubsectionPosition.split('.');
+        let pid = bpid['1'];
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -407,7 +409,7 @@ const AllContents = () => {
                 "course_id": id,
                 "code": basic.courseCode,
                 'name': basic.courseName,
-                "position_id": nextSubsectionPosition,
+                "position_id": pid,
                 "title": nextSubsectionTitle,
                 "section_id": sectionUID,
             }
@@ -477,7 +479,7 @@ const AllContents = () => {
         let highestSub = detail.sections[presentSectionIndex].subsections[presentSubsectionIndex].lessons.length;
         let responseSub = "0" + (highestSub + 1);
 
-        setLessonPosition(subsectionPID + '.' + responseSub);
+        setLessonPosition(sectionPID + '.' + subsectionPID + '.' + responseSub);
     }
 
     const toggleNewLesson = () => {
@@ -515,6 +517,8 @@ const AllContents = () => {
             setIsLoading(false);
             return false;
         }
+        let bpid = nextLessonPosition.split('.');
+        let pid = bpid['2'];
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
@@ -526,7 +530,7 @@ const AllContents = () => {
                 "course_id": id,
                 "code": basic.courseCode,
                 'name': basic.courseName,
-                "position_id": nextLessonPosition,
+                "position_id": pid,
                 "title": nextLessonTitle,
                 "subsection_id": subsectionUID,
             }
@@ -566,12 +570,13 @@ const AllContents = () => {
     useEffect(() => {
         detail.getDetails(id);
         edit.setUnsaved(false)
-    }, [id, location.key])
+    }, [id, location.key]);
+    
     return (
         <>
             <SectionsLanding />
 
-            <div className='mt-4 mb-2' style={{ height: '75vh' }} >
+            <div className='mt-4 mb-2' style={{ height: '90vh' }} >
                 <div className='container mb-2' style={{ height: '100%' }}>
                     <div className='row' style={{ height: '100%' }}>
                         {/* Left side of the content page  */}
@@ -599,7 +604,7 @@ const AllContents = () => {
                                 </div>
                                 <div className="col-lg-12 mt-3" style={{ height: 'calc(100% - 48px)' }}>
                                     <div className='conMenu p-0 w-100' style={{ height: '100%' }}>
-                                        <div className='rightStraight w-100 pt-2 pb-2' style={{ height: '100%' }}>
+                                        <div className='rightStraight w-100 pt-2 pb-2' style={{ height: '100%', overflowY: 'scroll' }}>
                                             <ul className='no-list-style p-0 m-0 secMain w-100' id="clickIn">
                                                 {(detail.sections.length === 0) ? (
                                                     <>
@@ -725,7 +730,7 @@ const AllContents = () => {
                                                                                         }
                                                                                     }>
                                                                                     <span className='leftIds'>
-                                                                                        {subSection.position_id}
+                                                                                    {asection.position_id}.{subSection.position_id}
                                                                                     </span>
                                                                                     <span className={`fa mr-15 ${(detail.opened.includes(subSection.id)) ? 'fa-caret-down' : 'fa-caret-right'}`}></span>
                                                                                     <span>
@@ -763,7 +768,7 @@ const AllContents = () => {
                                                                                                 }
                                                                                             }>
                                                                                             <span className='leftIds' >
-                                                                                                {lesson.position_id}
+                                                                                            {asection.position_id}.{subSection.position_id}.{lesson.position_id}
                                                                                             </span>
                                                                                             <span className={`${(detail.activeLesson === lesson.id) ? 'activeTab' : ''} w-100 d-flex alignCenter p-1`}>
                                                                                                 <span>
@@ -961,10 +966,10 @@ const AllContents = () => {
                                                                 setNextLessonTitle('');
                                                                 document.getElementById('lessonForm').reset();
                                                                 setPresentSubectionIndex('');
-                                                                setPresentLessonIndex('')
+                                                                setPresentLessonIndex('');
                                                             } else {
-                                                                setSectionUID('')
-                                                                setSectionPID('')
+                                                                setSectionUID('');
+                                                                setSectionPID('');
                                                                 setDummySectionTitle('');
                                                                 setPresentSectionIndex('');
                                                                 setNewSubsectionOngoing(false);
@@ -972,7 +977,7 @@ const AllContents = () => {
                                                                 setDummyLessonTitle('');
                                                                 setNextLessonTitle('');
                                                                 setPresentSubectionIndex('');
-                                                                setPresentLessonIndex('')
+                                                                setPresentLessonIndex('');
                                                                 document.getElementById('lessonForm').reset();
                                                             }
                                                         }

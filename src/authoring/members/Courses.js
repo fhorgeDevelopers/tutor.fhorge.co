@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useNew } from '../../providers/New';
 import style from './courses.module.css';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../providers/Auth';
+// import { usePreview } from '../../providers/Preview';
 
 const Courses = () => {
+    const auth = useAuth();
     const newHook = useNew();
+    // const preview = usePreview();
     const location = useLocation();
 
     const [order, setOrder] = useState('');
@@ -15,7 +19,7 @@ const Courses = () => {
         } else {
             setOrder(n);
         }
-    } 
+    }
 
     const sortTable = (n) => {
         var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -87,10 +91,10 @@ const Courses = () => {
                         <div className='col-lg-3  p-2'>
                             <div className='d-flex alignCenter text-center'>
                                 <label htmlFor='tag'>
-                                    Category Tag:
+                                    Subject:
                                 </label>
-                                <select id="tag" className="noBg ml-2">
-                                    <option value="">Select Tag</option>
+                                <select id="tag" className="noBg ml-2 form-select">
+                                    <option value="">Select subject</option>
                                 </select>
                             </div>
                         </div>
@@ -99,33 +103,44 @@ const Courses = () => {
                                 <label htmlFor='title'>
                                     Role:
                                 </label>
-                                <select id="role" className="noBg ml-2">
+                                <select id="role" className="noBg ml-2 form-select">
                                     <option value="">Select Role</option>
+                                    <option value="">Author</option>
+                                    <option value="">Editor</option>
+                                    <option value="">Lead</option>
+                                    <option value="">Reader</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className='col-lg-2 p-2'>
+                            <div className='d-flex alignCenter text-center'>
+                                <label htmlFor='status'>
+                                    Status:
+                                </label>
+                                <select id="status" className="noBg ml-2 form-select">
+                                    <option value="">Select Status</option>
+                                    <option value="NP">NP</option>
+                                    <option value="P">P</option>
                                 </select>
                             </div>
                         </div>
                         <div className='col-lg-3 p-2'>
                             <div className='d-flex alignCenter text-center'>
-                                <label htmlFor='status'>
-                                    Status:
-                                </label>
-                                <select id="status" className="noBg ml-2">
-                                    <option value="">Select Status</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div className='col-lg-2 p-2'>
-                            <div className='d-flex alignCenter text-center'>
                                 <label htmlFor='price'>
-                                    Price:
+                                    Institution:
                                 </label>
-                                <select id="price" className="noBg ml-2">
+                                <select id="price" className="noBg ml-2 form-select">
                                     <option value="">Select</option>
+                                    {auth.institutions.map((inst) => (
+                                        <option key={inst['id']} value={inst['id']}>
+                                            {inst['institution']}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
                         <div className='col-lg-2 p-2'>
-                            <button className="flterBtn w-100">
+                            <button className=" w-100 btn flterBtn btn-light">
                                 Filter
                             </button>
                         </div>
@@ -175,7 +190,7 @@ const Courses = () => {
                                 </>
                             ) : (
                                 <>
-                                    <table className="table table-striped table-hover" id="myTable">
+                                    <table className="table table-striped table-hover" id="myTable" style={{ tableLayout: 'fixed' }}>
                                         <thead>
                                             <tr>
                                                 <th
@@ -196,7 +211,10 @@ const Courses = () => {
                                                             toggleOrder(1);
                                                         }
                                                     }
-                                                >Course Name &nbsp; <span className={(order !== 1) ? `fa fa-caret-right` : `fa fa-caret-up`}></span> </th>
+                                                >
+                                                    Course Name &nbsp; <span className={(order !== 1) ? `fa fa-caret-right` : `fa fa-caret-up`}></span>
+                                                </th>
+                                                <th scope="col">Subject</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Institution</th>
                                                 <th scope="col">Role</th>
@@ -213,13 +231,28 @@ const Courses = () => {
                                                         {program.course_id.name}
                                                     </td>
                                                     <td>
+                                                        {
+                                                            (program.course_id.subject_id === null) ? (
+                                                                <>
+                                                                    null
+                                                                </>
+                                                            ) : (
+                                                                <>
+                                                                    {
+                                                                        program.course_id.subject_id.subject_name
+                                                                    }
+                                                                </>
+                                                            )
+                                                        }
+                                                    </td>
+                                                    <td>
                                                         {program.course_id.publication_status}
                                                     </td>
                                                     <td>
                                                         {
                                                             (program.course_id.institution_id === null) ? (
                                                                 <>
-                                                                    
+                                                                    null
                                                                 </>
                                                             ) : (
                                                                 <>
@@ -265,8 +298,11 @@ const Courses = () => {
                                                                     }
                                                                     window.localStorage.setItem('id', program.course_id.id)
                                                                     newHook.enterEdit(role, program.course_id.id)
-                                                                } else if(e.target.value === 'delete') {
+                                                                } else if (e.target.value === 'delete') {
                                                                     newHook.deleteCourse(program.course_id.id)
+                                                                } else if (e.target.value === 'preview') {
+                                                                    // preview.toggleViewPreview(program.course_id.id);
+                                                                    // window.localStorage.setItem('id', program.course_id.id)
                                                                 } else {
                                                                     return false;
                                                                 }

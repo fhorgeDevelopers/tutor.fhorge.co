@@ -11,7 +11,7 @@ const BasicContext = createContext(null);
 export const Basic = ({ children }) => {
     const hook = useHook();
     const auth = useAuth();
-    const edit = useEdit();
+    const edit = useEdit()
     const location = useLocation();
     const id = window.localStorage.getItem('id');
     const [courseDetails, setCourseDetails] = useState([]);
@@ -115,7 +115,7 @@ export const Basic = ({ children }) => {
 
                     // Institution ID and Name 
                     if (response.data[0].institution_id === null) {
-                        setInstitutionID('');
+                        setInstitutionID(''); 
                     } else {
                         setInstitutionID(response.data[0].institution_id.id);
                     }
@@ -188,7 +188,7 @@ export const Basic = ({ children }) => {
                 "enrollment_type": enrollmentType,
                 'card_image': imageLink,
                 'intro_video': videoLink,
-                "course_pacing": coursePacing
+                // "course_pacing": coursePacing
             },
             headers: {
                 'Authorization': auth.token

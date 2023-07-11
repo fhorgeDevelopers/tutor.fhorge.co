@@ -320,3 +320,19 @@ span:disabled {
 .btn-danger {
   background-color: rgba(245, 113, 113) !important;
 }
+
+.compTable {
+  padding: 5px;
+  margin: 0;
+  width: 100%;
+}
+
+.compTable > tr {
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-radius: 7px;
+  position: relative;
+}
+
+.compTable tr:nth-child(odd) {background-color: rgba(242, 248, 249, 1);}
+.compTable tr:nth-child(even) {background-color: #FFFFFF;}

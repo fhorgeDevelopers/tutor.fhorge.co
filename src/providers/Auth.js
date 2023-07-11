@@ -23,7 +23,9 @@ export const Auth = ({ children }) => {
     const [enrollmentChoices, setEnrollmentChoices] = useState([]);
     const [videosOptions, setVideoOptions] = useState([]);
     const [exerciseOptions, setExerciseOptions] = useState([]);
+    const [questionOptions, setQuestionOptions] = useState([]);
     const [institutions, setInstitutions] = useState([]);
+    const [rankingOptions, setRankingOptions] = useState([]);
 
     const checkIfLoggedIn = () => {
         if (window.localStorage.getItem('username')) {
@@ -116,13 +118,15 @@ export const Auth = ({ children }) => {
                 .then(function (response) {
                     setComponentOptions(response.data.component_types_choices);
                     setHtmlOptions(response.data.html_choices);
-                    setSubjectGroup(response.data.subject);
+                    setSubjectGroup(response.data.subject_groups);
                     setLanguageChoices(response.data.language_choices);
                     setLevelChoices(response.data.level_choices);
                     setEnrollmentChoices(response.data.enrollment_source_choices);
                     setVideoOptions(response.data.video_choices);
                     setExerciseOptions(response.data.exercise_type_choices)
+                    setQuestionOptions(response.data.question_type_choices)
                     setInstitutions(response.data.institution)
+                    setRankingOptions(response.data)
                 })
         }
     }
@@ -140,7 +144,7 @@ export const Auth = ({ children }) => {
     }, [location]);
 
     return (
-        <AuthContext.Provider value={{ id, userName, token, videosOptions, exerciseOptions, componentOptions, institutions, enrollmentChoices, levelChoices, subjectGroup, languageChoices, htmlOptions, getChoices, isLoggedIn, logUserIn, logOut }}>
+        <AuthContext.Provider value={{ id, userName, token, videosOptions, exerciseOptions, questionOptions, componentOptions, institutions, enrollmentChoices, levelChoices, subjectGroup, languageChoices, htmlOptions, getChoices, isLoggedIn, logUserIn, logOut }}>
             {children}
         </AuthContext.Provider>
     )

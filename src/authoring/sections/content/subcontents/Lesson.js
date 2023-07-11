@@ -129,7 +129,7 @@ const Lesson = (props) => {
                             'Authorization': auth.token
                         },
                         data: {
-                            id: props.data.id
+                            id: lessonID
                         }
                     };
                     axios(config)
@@ -219,7 +219,7 @@ const Lesson = (props) => {
                         text: "Created",
                         icon: "success",
                         buttons: false,
-                        timer: 5000, 
+                        timer: 5000,
                     })
                     detail.toggleNewLesson();
                     setIsLoading(false);
@@ -408,7 +408,7 @@ const Lesson = (props) => {
                     </div>
                     <hr />
 
-                    <form onSubmit={(e) => e.preventDefault() } id="newComForm" className={detail.newLesson ? 'row' : 'd-none'}>
+                    <form onSubmit={(e) => e.preventDefault()} id="newComForm" className={detail.newLesson ? 'row' : 'd-none'}>
                         <div className='col-md-3'>
                             <div className="form-group mb-3">
                                 <label className="label" htmlFor="courseName">
@@ -465,16 +465,17 @@ const Lesson = (props) => {
 
                         <hr />
                     </form>
-                    {props.data.components ? (
-                        <>
-                            {(props.data.components.length !== 0) ? (
-                                <>
-                                    <Component data={props.data.components} key={key} />
-                                </>
-                            ) : null}
-                        </>
-                    ) : (null)}
-
+                    <table className='compTable'>
+                        {props.data.components ? (
+                            <>
+                                {(props.data.components.length !== 0) ? (
+                                    <>
+                                        <Component data={props.data.components} key={key} />
+                                    </>
+                                ) : null}
+                            </>
+                        ) : (null)}
+                    </table>
                 </div>
             </div>
         </>
