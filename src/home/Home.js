@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <>
             <HomeNav />
-            <div style={{ width: '100%', height: '95vh', background: 'rgba(0, 135, 61, 0.51)' }}></div>
+            <div style={{ width: '100%', height: '95vh', background: '#f3f6f7' }}></div>
             <Footer />
         </>
     )

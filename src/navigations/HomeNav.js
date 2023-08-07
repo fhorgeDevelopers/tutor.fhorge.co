@@ -4,7 +4,7 @@ import QuestenceLogo from '../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
 import { useHook } from '../contexts/Hook';
-import User from '../images/19900b1ea5f3a63cfbd59c6c09038027.png'
+import User from '../images/icon1.png'
 
 const HomeNav = () => {
     const auth = useAuth();
@@ -16,11 +16,11 @@ const HomeNav = () => {
                 <div className='container d-flex justify-content-between'>
                     <div className='d-flex align-items-center' >
                         <Link className={`${style.navTitle} navbar-brand mr-3`} to="/">
-                            <img src={QuestenceLogo} alt="Questence" width="190" />
+                            <img src={QuestenceLogo} alt="Questence" width="190" height={40} />
                         </Link>
                         <div className='collapse navbar-collapse'>
-                            <button disabled={!auth.isLoggedIn} className='btn menu-link' style={{ fontWeight: 'bolder' }} onClick={e => { navigate("/authoring") }}>
-                                Authoring
+                            <button disabled={!auth.isLoggedIn} className='btn menu-link' style={{ fontWeight: 'bolder' }} onClick={e => { navigate("/creation") }}>
+                                Creation
                             </button>
                             <button disabled={!auth.isLoggedIn} className='btn menu-link' style={{ fontWeight: 'bolder' }}>
                                 Administering

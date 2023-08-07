@@ -1,8 +1,8 @@
 import React from 'react'
-import { useEdit } from '../../../../providers/Edit'
-import { useBasic } from '../../../../providers/Basic';
+import { useEdit } from '../../../../contexts/Edit'
+import { useBasic } from '../../../../contexts/Basic';
 import RightContent from './RightContent';
-import { useDetail } from '../../../../providers/Detail';
+import { useDetail } from '../../../../contexts/Detail';
 
 const RightNav = () => {
     const edit = useEdit();

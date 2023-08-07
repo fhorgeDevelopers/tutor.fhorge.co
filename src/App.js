@@ -14,7 +14,7 @@ import { EditCon } from './contexts/EditContent';
 import { Detail } from './contexts/Detail';
 import Forgot from './forgotPassword/Forgot';
 import Home from './home/Home';
-import Authoring from './creation/creation';
+import Authoring from './creation/Authoring';
 import BasicSection from './creation/sections/basic/BasicSection';
 import Footer from './footer/Footer';
 import GradingSection from './creation/sections/grading/GradingSection';

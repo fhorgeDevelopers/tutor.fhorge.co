@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDetail } from '../../../../providers/Detail';
+import { useDetail } from '../../../../contexts/Detail';
 import Lesson from './Lesson';
 import Section from './Section';
 import Subsection from './Subsection';

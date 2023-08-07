@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './footer.module.css';
-import Logo from '../images/thelogo.png';
+import Logo from '../images/fhorge_orange.png';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/Auth';
 
@@ -94,7 +94,7 @@ const Footer = () => {
                         </div>
                         <div className='col-sm-12'>
                             <div className={style.copyRight}>
-                                © 2021 Questence. All rights reserved.
+                                © 2023 Fhorge. All rights reserved.
                             </div>
                         </div>
                     </div>

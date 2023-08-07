@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDetail } from '../../../../providers/Detail'
+import { useDetail } from '../../../../contexts/Detail'
 import { useParams } from 'react-router-dom';
 
 const LeftList = () => {

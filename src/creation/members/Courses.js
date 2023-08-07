@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useNew } from '../../providers/New';
+import { useNew } from '../../contexts/New';
 import style from './courses.module.css';
 import { useLocation } from 'react-router-dom';
-import { useAuth } from '../../providers/Auth';
-// import { usePreview } from '../../providers/Preview';
+import { useAuth } from '../../contexts/Auth';
+// import { usePreview } from '../../contexts/Preview';
 
 const Courses = () => {
     const auth = useAuth();
@@ -216,7 +216,6 @@ const Courses = () => {
                                                 </th>
                                                 <th scope="col">Subject</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Institution</th>
                                                 <th scope="col">Role</th>
                                                 <th scope="col">Action</th>
                                             </tr>
@@ -247,21 +246,6 @@ const Courses = () => {
                                                     </td>
                                                     <td>
                                                         {program.course_id.publication_status}
-                                                    </td>
-                                                    <td>
-                                                        {
-                                                            (program.course_id.institution_id === null) ? (
-                                                                <>
-                                                                    null
-                                                                </>
-                                                            ) : (
-                                                                <>
-                                                                    {
-                                                                        program.course_id.institution_id.institution
-                                                                    }
-                                                                </>
-                                                            )
-                                                        }
                                                     </td>
                                                     <td>
                                                         {(program.role_editor === true) ? 'Editor' : (

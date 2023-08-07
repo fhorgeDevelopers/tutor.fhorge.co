@@ -7,12 +7,12 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css';
 import LeftList from './LeftList';
 import RightContent from './RightContent';
-import { useNew } from '../../../../providers/New';
-import { useHook } from '../../../../providers/Hook';
-import { useAuth } from '../../../../providers/Auth';
-import { useEdit } from '../../../../providers/Edit';
-import { useDetail } from '../../../../providers/Detail';
-import { useBasic } from '../../../../providers/Basic';
+import { useNew } from '../../../../contexts/New';
+import { useHook } from '../../../../contexts/Hook';
+import { useAuth } from '../../../../contexts/Auth';
+import { useEdit } from '../../../../contexts/Edit';
+import { useDetail } from '../../../../contexts/Detail';
+import { useBasic } from '../../../../contexts/Basic';
 import swal from 'sweetalert';
 
 const ContentNav = () => {

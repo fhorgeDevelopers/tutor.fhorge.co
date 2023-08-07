@@ -4,7 +4,7 @@ import style from './nav.module.css';
 import QuestenceLogo from '../images/logo.png'
 import { useAuth } from '../contexts/Auth';
 import { useHook } from '../contexts/Hook';
-import User from '../images/19900b1ea5f3a63cfbd59c6c09038027.png'
+import User from '../images/icon1.png'
 import { useEdit } from '../contexts/Edit';
 import { useBasic } from '../contexts/Basic';
 
