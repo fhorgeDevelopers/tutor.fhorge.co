@@ -2,8 +2,8 @@ import React from 'react';
 import style from './nav.module.css';
 import QuestenceLogo from '../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../providers/Auth';
-import { useHook } from '../providers/Hook';
+import { useAuth } from '../contexts/Auth';
+import { useHook } from '../contexts/Hook';
 import User from '../images/19900b1ea5f3a63cfbd59c6c09038027.png'
 
 const HomeNav = () => {

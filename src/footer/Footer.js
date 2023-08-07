@@ -2,7 +2,7 @@ import React from 'react';
 import style from './footer.module.css';
 import Logo from '../images/thelogo.png';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../providers/Auth';
+import { useAuth } from '../contexts/Auth';
 
 const Footer = () => {
     const auth = useAuth();

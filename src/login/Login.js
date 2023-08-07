@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuth } from '../providers/Auth';
+import { useAuth } from '../contexts/Auth';
 import style from './login.module.css';
 import { Link } from 'react-router-dom';
 import Logo from '../images/logo.png'

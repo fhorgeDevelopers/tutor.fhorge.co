@@ -2,26 +2,26 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import Login from './login/Login';
 import PageNotFound from './notFound/PageNotFound';
-import { Auth } from './providers/Auth';
-import { Basic } from './providers/Basic';
-import { Hook } from './providers/Hook';
-import { New } from './providers/New';
-import { Edit } from './providers/Edit';
-import { RequireAuth } from './providers/RequireAuth';
+import { Auth } from './contexts/Auth';
+import { Basic } from './contexts/Basic';
+import { Hook } from './contexts/Hook';
+import { New } from './contexts/New';
+import { Edit } from './contexts/Edit';
+import { RequireAuth } from './contexts/RequireAuth';
 import { useEffect } from 'react';
-import { SubContent } from './providers/SubContent';
-import { EditCon } from './providers/EditContent';
-import { Detail } from './providers/Detail';
+import { SubContent } from './contexts/SubContent';
+import { EditCon } from './contexts/EditContent';
+import { Detail } from './contexts/Detail';
 import Forgot from './forgotPassword/Forgot';
 import Home from './home/Home';
-import Authoring from './authoring/Authoring';
-import BasicSection from './authoring/sections/basic/BasicSection';
+import Authoring from './creation/creation';
+import BasicSection from './creation/sections/basic/BasicSection';
 import Footer from './footer/Footer';
-import GradingSection from './authoring/sections/grading/GradingSection';
-import TeamSection from './authoring/sections/team/TeamSection';
-import ResourcesSection from './authoring/sections/resources/ResourcesSection';
-import SubmitSection from './authoring/sections/submit/SubmitSection';
-import AllContents from './authoring/sections/content/AllContents';
+import GradingSection from './creation/sections/grading/GradingSection';
+import TeamSection from './creation/sections/team/TeamSection';
+import ResourcesSection from './creation/sections/resources/ResourcesSection';
+import SubmitSection from './creation/sections/submit/SubmitSection';
+import AllContents from './creation/sections/content/AllContents';
 
 function App() {
   const location = useLocation();
@@ -50,7 +50,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring"
+                        path="/creation"
                         element={
                           <RequireAuth>
                             <New>
@@ -61,7 +61,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring/edit/basic/:id"
+                        path="/creation/edit/basic/:id"
                         element={
                           <RequireAuth>
                             <Edit>
@@ -73,7 +73,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring/edit/grading/:id"
+                        path="/creation/edit/grading/:id"
                         element={
                           <RequireAuth>
                             <Edit>
@@ -85,7 +85,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring/edit/courseTeam/:id"
+                        path="/creation/edit/courseTeam/:id"
                         element={
                           <RequireAuth>
                             <Edit>
@@ -97,7 +97,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring/edit/resources/:id"
+                        path="/creation/edit/resources/:id"
                         element={
                           <RequireAuth>
                             <Edit>
@@ -109,7 +109,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring/edit/content/:id"
+                        path="/creation/edit/content/:id"
                         element={
                           <RequireAuth>
                             <Edit>
@@ -123,7 +123,7 @@ function App() {
                       />
                       <Route
                         exact
-                        path="/authoring/edit/submit/:id"
+                        path="/creation/edit/submit/:id"
                         element={
                           <RequireAuth>
                             <Edit>
